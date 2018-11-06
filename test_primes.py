@@ -71,6 +71,14 @@ class TestPrimes(unittest.TestCase):
             [2, 3, 5, 7, 11, 13, 17, 19, 23, 29])
 
     def test_wheel(self):
+        self.assertRaises(ValueError, primes.Wheel, 0)
+
+        w = primes.Wheel(1)
+        self.assertEqual(w.ratio, 0.5)
+        gen = w.gen_divisors()
+        for k in [2, 3, 5, 7, 9, 11, 13, 15, 17, 19]:
+            self.assertEqual(next(gen), k)
+
         w = primes.Wheel(3)
         self.assertAlmostEqual(w.ratio, 0.2666667)
         gen = w.gen_divisors()
